@@ -2,6 +2,7 @@ package web.dao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import web.model.Role;
 import web.model.User;
 import web.dao.RoleDAOImpl;
 
@@ -39,10 +40,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getById(Long id) {
-        User user = entityManager.createQuery("SELECT u FROM User u where u.id = :id", User.class)
-                .setParameter("id", id)
-                .getSingleResult();
-        return user;
+        return entityManager.find(User.class, id );
     }
 
     @Override

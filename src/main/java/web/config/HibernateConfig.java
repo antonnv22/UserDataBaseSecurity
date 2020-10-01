@@ -23,10 +23,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource(value = {"classpath:db.properties"})
 public class HibernateConfig {
 
-    private Environment environment;
+    private final Environment environment;
 
     @Autowired
-    public void setEnvironment(Environment environment) {
+    public HibernateConfig(Environment environment) {
         this.environment = environment;
     }
 

@@ -6,14 +6,14 @@
     <meta charset="utf-8" />
 </head>
 <body>
-    <form th:action="@{/edit}" th:object="${user}" method="post">
+    <form th:action="@{/admin/edit}" th:object="${user}" method="post">
         <p><input type="hidden" th:field="*{id}" /></p>
 
         <p><label for="name">name</label></p>
         <p><input type="text" th:field="*{name}" id="name" value="name" required></p>
 
         <p><label for="password">password</label></p>
-        <p><input type="text" th:field="*{password}" id="password" value="password" required></p>
+        <p><input type="password" th:field="*{password}" id="password" value="password" required></p>
 
         <p><label for="lastname">lastname</label></p>
         <p><input type="text" th:field="*{lastname}" id="lastname" value="lastname" required></p>
@@ -24,6 +24,12 @@
         <p><label for="city">city</label></p>
         <p><input type="text" th:field="*{city}" id="city" value="city" required></p>
 
+        <ul>
+            <li th:each="role : ${rolelist}">
+                <input type="checkbox" name="roles" th:field="*{roles}" th:value="${role}"
+                       th:text="${role.getName()}" />
+            </li>
+        </ul>
         <p>
             <input type="submit" value="edit">
         </p>

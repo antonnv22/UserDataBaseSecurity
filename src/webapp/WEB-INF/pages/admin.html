@@ -23,19 +23,19 @@
     <tr th:each="user : ${usersList}">
         <td th:text="${user.id}"></td>
         <td th:text="${user.name}"></td>
-        <td th:text="${user.password}"></td>
+        <td th:password="${user.password}"></td>
         <td th:text="${user.lastname}"></td>
         <td th:text="${user.age}"></td>
         <td th:text="${user.city}"></td>
         <td>
-            <a th:href="@{'/edit/'+${user.id}}">edit</a>
-            <a th:href="@{'/delete/'+${user.id}}">delete</a>
+            <a th:href="@{'/admin/edit/'+${user.id}}">edit</a>
+            <a th:href="@{'/admin/delete/'+${user.id}}">delete</a>
         </td>
     </tr>
     </tbody>
 </table>
 <h2>Add user</h2>
-<a th:href="@{'/add'}">Add new user</a>
+<a th:href="@{'/admin/add'}">Add new user</a>
 <p>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="logout"/>

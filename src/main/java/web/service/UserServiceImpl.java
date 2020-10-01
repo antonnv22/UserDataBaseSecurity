@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import web.dao.UserDAO;
 import web.dao.RoleDAO;
 import web.model.Role;
@@ -20,6 +22,9 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService, UserDetailsService {
     private UserDAO userDAO;
     private RoleDAO roleDAO;
+
+    @Autowired
+    PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public void setUserDAO(UserDAO userDAO) {
@@ -38,14 +43,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void save(User user) {
-        Role role_user = roleDAO.createRoleIfNotFound("USER", 2L);
-        HashSet<Role> roles = new HashSet<>();
-        roles.add(role_user);
-        if (user.getName().equals("ADMIN")) {
-            Role role_admin = roleDAO.createRoleIfNotFound("ADMIN", 1L);
-            roles.add(role_admin);
-        }
-        user.setRoles(roles);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDAO.save(user);
     }
 

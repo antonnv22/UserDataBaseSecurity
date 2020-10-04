@@ -31,7 +31,7 @@ public class AdminController {
         this.roleDAO = roleDAO;
     }
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    @GetMapping("/admin")
     public ModelAndView allUsers() {
         List<User> users = userService.allUsers();
         ModelAndView modelAndView = new ModelAndView();
@@ -40,18 +40,18 @@ public class AdminController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/add", method = RequestMethod.GET)
+    @GetMapping(value = "/admin/add")
     public String addPage() {
         return "addUser";
     }
 
-    @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
+    @PostMapping(value = "/admin/add")
     public String addUser(@ModelAttribute("user") User user) {
         userService.save(user);
         return "redirect:/admin";
     }
 
-    @RequestMapping(value = "/admin/edit/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/admin/edit/{id}")
     public ModelAndView editPage(@PathVariable("id") long id) {
         User user = userService.getById(id);
         ModelAndView modelAndView = new ModelAndView();
@@ -66,7 +66,7 @@ public class AdminController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
+    @PostMapping(value = "/admin/edit")
     public String editUser(
             @ModelAttribute("id") Long id,
             @ModelAttribute("name") String name,
@@ -100,7 +100,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @RequestMapping(value = "/admin/delete/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/admin/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         User user = userService.getById(id);
         userService.delete(user);

@@ -30,7 +30,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "hello", method = RequestMethod.GET)
+    @GetMapping("/hello")
     public String printWelcome(ModelMap model) {
         List<String> messages = new ArrayList<>();
         messages.add("Hello!");
@@ -40,7 +40,7 @@ public class UserController {
         return "hello";
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.GET)
+    @GetMapping("/login")
     public String loginPage() {
         return "login";
     }

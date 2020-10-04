@@ -13,16 +13,16 @@
         <p><input type="text" th:field="*{name}" id="name" value="name" required></p>
 
         <p><label for="password">password</label></p>
-        <p><input type="password" th:field="*{password}" id="password" value="password" required></p>
+        <p><input type="password" th:field="*{password}" id="password" value="password"></p>
 
         <p><label for="lastname">lastname</label></p>
-        <p><input type="text" th:field="*{lastname}" id="lastname" value="lastname" required></p>
+        <p><input type="text" th:field="*{lastname}" id="lastname" value="lastname"></p>
 
         <p><label for="age">age</label></p>
-        <p><input type="number" th:field="*{age}" id="age" value="age" required></p>
+        <p><input type="number" th:field="*{age}" id="age" value="age"></p>
 
         <p><label for="city">city</label></p>
-        <p><input type="text" th:field="*{city}" id="city" value="city" required></p>
+        <p><input type="text" th:field="*{city}" id="city" value="city"></p>
 
         <ul>
             <li th:each="role : ${rolelist}">

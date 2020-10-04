@@ -27,7 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
+
+        http
+                .formLogin()
                 // указываем страницу с формой логина
                 .loginPage("/login")
                 //указываем логику обработки при логине
@@ -56,8 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers("/admin*").access("hasAuthority('ADMIN')")
-                .antMatchers("/user").access("hasAuthority('USER')")
+                .antMatchers("/admin/**").access("hasAuthority('ADMIN')")
+                .antMatchers("/user/**").access("hasAuthority('USER')")
                 .anyRequest().authenticated();
     }
 

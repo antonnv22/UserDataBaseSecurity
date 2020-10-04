@@ -57,12 +57,12 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("adminEditUser");
         modelAndView.addObject("user", user);
-          HashSet<Role> Setroles = new HashSet<>();
-          Role role_admin = roleDAO.createRoleIfNotFound("ADMIN", 1L);
-          Role role_user = roleDAO.createRoleIfNotFound("USER", 2L);
-          Setroles.add(role_admin);
-          Setroles.add(role_user);
-          modelAndView.addObject("rolelist", Setroles);
+        HashSet<Role> Setroles = new HashSet<>();
+        Role role_admin = roleDAO.createRoleIfNotFound("ADMIN", 1L);
+        Role role_user = roleDAO.createRoleIfNotFound("USER", 2L);
+        Setroles.add(role_admin);
+        Setroles.add(role_user);
+        modelAndView.addObject("rolelist", Setroles);
         return modelAndView;
     }
 
@@ -72,13 +72,18 @@ public class AdminController {
             @ModelAttribute("name") String name,
             @ModelAttribute("password") String password,
             @ModelAttribute("lastname") String lastname,
+            @ModelAttribute("age") byte age,
+            @ModelAttribute("city") String city,
             @RequestParam("roles") String[] roles
     ) {
         User user = userService.getById(id);
         user.setName(name);
         user.setLastname(lastname);
-        user.setPassword(password);
-
+        user.setAge(age);
+        user.setCity(city);
+        if (!password.isEmpty()) {
+            user.setPassword(password);
+        }
         Set<Role> Setroles = new HashSet<>();
         for (String st : roles) {
             if (st.equals("ADMIN")) {
